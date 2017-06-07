@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RansomwareTutorial.Controllers
+namespace RansomwareTutorial.Helpers
 {
     public class CryptoHelper
     {
@@ -107,7 +107,7 @@ namespace RansomwareTutorial.Controllers
 
             return aes;
         }
-        public static void CryptoAES(ICryptoTransform encryptor, string file, byte[] fileBytes, string lockedDataLocation)
+        public static void CryptoTransformAES(ICryptoTransform encryptor, string file, byte[] fileBytes, string lockedDataLocation)
         {
             using (MemoryStream msEncrypt = new MemoryStream())
             {

@@ -48,7 +48,8 @@
   <ItemGroup>
     <Compile Include="Controllers\DecryptionProcessor.cs" />
     <Compile Include="Controllers\EncryptionProcessor.cs" />
-    <Compile Include="Controllers\CryptoHelper.cs" />
+    <Compile Include="Helpers\LogHelper.cs" />
+    <Compile Include="Helpers\CryptoHelper.cs" />
     <Compile Include="RansomTutorial.cs">
       <SubType>Form</SubType>
     </Compile>

